@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Info, ArrowUpRight } from "lucide-react";
 import FrameModal from "./FrameModal";
+import TextAnimate from "./magicui/text-animate";
 
 const FILTERS = [
   { id: "all", label: "All Frames" },
@@ -126,7 +127,13 @@ export default function CollectionSection() {
     <section id="collection" className="py-24 md:py-32 relative bg-[#f8faf9] dark:bg-[#090b0a] transition-colors duration-250">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6"
+        >
           <div>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light text-neutral-900 dark:text-white font-sans tracking-tight">
               Hand-finished frames designed for{" "}
@@ -134,13 +141,26 @@ export default function CollectionSection() {
             </h2>
           </div>
 
-          <p className="text-sm text-neutral-600 dark:text-neutral-400 max-w-md leading-relaxed">
+          <TextAnimate
+            animation="fadeIn"
+            by="word"
+            startOnView
+            once
+            duration={0.6}
+            className="text-sm text-neutral-600 dark:text-neutral-400 max-w-md leading-relaxed"
+          >
             Every silhouette is engineered with calibrated weight balance, Japanese rivet hinges, and hypoallergenic skin contact points.
-          </p>
-        </div>
+          </TextAnimate>
+        </motion.div>
 
         {/* Filter Pills with Framer Motion spring indicator */}
-        <div className="flex items-center gap-2 overflow-x-auto pb-4 mb-10 no-scrollbar">
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.5, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+          className="flex items-center gap-2 overflow-x-auto pb-4 mb-10 no-scrollbar"
+        >
           {FILTERS.map((f) => (
             <button
               key={f.id}
@@ -159,7 +179,7 @@ export default function CollectionSection() {
               </span>
             </button>
           ))}
-        </div>
+        </motion.div>
 
         {/* Eyewear Grid */}
         <motion.div layout className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -171,29 +191,36 @@ export default function CollectionSection() {
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
+                whileHover={{ y: -6, transition: { duration: 0.25, ease: [0.22, 1, 0.36, 1] } }}
+                whileTap={{ scale: 0.99 }}
                 transition={{ duration: 0.4 }}
-                className="group relative rounded-3xl bg-white dark:bg-[#0c120f] border border-neutral-200 dark:border-white/10 hover:border-emerald-500/40 p-5 flex flex-col justify-between transition-all duration-300 shadow-md shadow-black/5 dark:shadow-none hover:shadow-xl hover:shadow-emerald-500/5"
+                className="group relative rounded-3xl bg-white dark:bg-[#0c120f] border border-neutral-200 dark:border-white/10 hover:border-emerald-500/40 p-5 flex flex-col justify-between transition-colors duration-300 shadow-md shadow-black/5 dark:shadow-none hover:shadow-xl hover:shadow-emerald-500/5 cursor-pointer"
               >
                 {/* Card Top Action */}
                 <div className="flex items-center justify-end mb-2">
-                  <button
-                    onClick={() => setSelectedProduct(product)}
+                  <motion.button
+                    whileHover={{ scale: 1.12 }}
+                    whileTap={{ scale: 0.9 }}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setSelectedProduct(product);
+                    }}
                     className="w-7 h-7 rounded-full bg-neutral-100 hover:bg-neutral-200 dark:bg-white/5 dark:hover:bg-white/15 border border-neutral-200 dark:border-white/5 flex items-center justify-center text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors"
                     title="Inspect frame measurements"
                   >
                     <Info className="w-3.5 h-3.5" />
-                  </button>
+                  </motion.button>
                 </div>
 
-                {/* Real Eyewear Photo Preview */}
+                {/* Real Eyewear Photo Preview with smooth zoom */}
                 <div
                   onClick={() => setSelectedProduct(product)}
-                  className="w-full h-44 rounded-2xl overflow-hidden bg-[#f1f5f3] dark:bg-[#070a08] border border-neutral-200 dark:border-white/5 flex items-center justify-center cursor-pointer my-2 relative group-hover:border-emerald-500/30 transition-all duration-300"
+                  className="w-full h-44 rounded-2xl overflow-hidden bg-[#f1f5f3] dark:bg-[#070a08] border border-neutral-200 dark:border-white/5 flex items-center justify-center cursor-pointer my-2 relative group-hover:border-emerald-500/30 transition-colors duration-300"
                 >
                   <img
                     src={product.image}
                     alt={product.name}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="w-full h-full object-cover group-hover:scale-106 transition-transform duration-500 ease-out"
                     loading="lazy"
                   />
                 </div>
@@ -219,13 +246,15 @@ export default function CollectionSection() {
                     </span>
 
                     {/* Quick specs trigger */}
-                    <button
+                    <motion.button
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
                       onClick={() => setSelectedProduct(product)}
                       className="text-[11px] uppercase tracking-wider text-neutral-500 dark:text-neutral-400 hover:text-emerald-600 dark:hover:text-emerald-300 flex items-center gap-1 font-medium transition-colors"
                     >
                       <span>Specs</span>
                       <ArrowUpRight className="w-3 h-3" />
-                    </button>
+                    </motion.button>
                   </div>
                 </div>
               </motion.div>

@@ -1,12 +1,19 @@
 "use client";
 
 import Link from "next/link";
+import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 
 export default function Footer() {
   return (
     <footer className="bg-[#f1f5f3] dark:bg-[#050706] border-t border-neutral-200 dark:border-white/5 pt-16 pb-12 text-xs text-neutral-600 dark:text-neutral-400 transition-colors duration-250">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-40px" }}
+        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
+      >
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-16 border-b border-neutral-200 dark:border-white/5">
           {/* Brand Info */}
           <div className="lg:col-span-2 space-y-4">
@@ -142,7 +149,7 @@ export default function Footer() {
             <span className="hover:text-neutral-800 dark:hover:text-neutral-300 cursor-pointer">Accessibility</span>
           </div>
         </div>
-      </div>
+      </motion.div>
     </footer>
   );
 }

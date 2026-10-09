@@ -32,13 +32,16 @@ export default function FrameModal({ frame, onClose }) {
           className="relative w-full max-w-2xl bg-white dark:bg-[#0d1410] border border-neutral-200 dark:border-emerald-500/20 rounded-3xl p-6 sm:p-8 shadow-2xl z-10 overflow-hidden transition-colors"
         >
           {/* Close button */}
-          <button
+          <motion.button
+            whileHover={{ scale: 1.1, rotate: 90 }}
+            whileTap={{ scale: 0.9 }}
+            transition={{ duration: 0.2 }}
             onClick={onClose}
             className="absolute top-5 right-5 w-8 h-8 rounded-full bg-neutral-100 hover:bg-neutral-200 dark:bg-white/5 dark:hover:bg-white/10 border border-neutral-200 dark:border-white/10 flex items-center justify-center text-neutral-500 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white transition-colors"
             aria-label="Close"
           >
             <X className="w-4 h-4" />
-          </button>
+          </motion.button>
 
           <div className="flex flex-col gap-6">
             {/* Title & Price */}
@@ -121,23 +124,29 @@ export default function FrameModal({ frame, onClose }) {
 
             {/* Actions */}
             <div className="flex flex-col sm:flex-row gap-3 pt-2">
-              <a
+              <motion.a
                 href={waUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1 flex items-center justify-center gap-2 py-3.5 px-6 rounded-full bg-emerald-500 hover:bg-emerald-600 dark:hover:bg-emerald-400 text-white dark:text-[#090b0a] text-xs font-bold uppercase tracking-wider transition-all shadow-sm"
+                whileHover={{ scale: 1.02, y: -1 }}
+                whileTap={{ scale: 0.98 }}
+                transition={{ duration: 0.18 }}
+                className="flex-1 flex items-center justify-center gap-2 py-3.5 px-6 rounded-full bg-emerald-500 hover:bg-emerald-600 dark:hover:bg-emerald-400 text-white dark:text-[#090b0a] text-xs font-bold uppercase tracking-wider transition-colors shadow-sm"
               >
                 <MessageCircle className="w-4 h-4 text-white dark:text-[#090b0a]" />
                 <span>Reserve in Store via WhatsApp</span>
-              </a>
+              </motion.a>
 
-              <a
+              <motion.a
                 href="#book"
                 onClick={onClose}
-                className="flex items-center justify-center py-3.5 px-6 rounded-full bg-neutral-100 hover:bg-neutral-200 dark:bg-white/5 dark:hover:bg-white/10 border border-neutral-200 dark:border-white/10 text-neutral-800 dark:text-white text-xs font-medium tracking-wide transition-all"
+                whileHover={{ scale: 1.02, y: -1 }}
+                whileTap={{ scale: 0.98 }}
+                transition={{ duration: 0.18 }}
+                className="flex items-center justify-center py-3.5 px-6 rounded-full bg-neutral-100 hover:bg-neutral-200 dark:bg-white/5 dark:hover:bg-white/10 border border-neutral-200 dark:border-white/10 text-neutral-800 dark:text-white text-xs font-medium tracking-wide transition-colors"
               >
                 Book Eye Exam First
-              </a>
+              </motion.a>
             </div>
           </div>
         </motion.div>

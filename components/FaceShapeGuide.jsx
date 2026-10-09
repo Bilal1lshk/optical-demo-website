@@ -55,7 +55,13 @@ export default function FaceShapeGuide() {
   return (
     <section id="face-guide" className="py-24 md:py-32 relative bg-[#f8faf9] dark:bg-[#090b0a] transition-colors duration-250">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-16 gap-6">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          className="flex flex-col lg:flex-row lg:items-end justify-between mb-16 gap-6"
+        >
           <div>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light text-neutral-900 dark:text-white font-sans tracking-tight">
               Find frames that match{" "}
@@ -67,15 +73,23 @@ export default function FaceShapeGuide() {
           <p className="text-sm text-neutral-600 dark:text-neutral-400 max-w-md leading-relaxed">
             Quick recommendations based on your facial structure and bridge fit.
           </p>
-        </div>
+        </motion.div>
 
         {/* Face Shape Picker Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-10">
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.55, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+          className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-10"
+        >
           {FACE_SHAPES.map((shape) => {
             const isSelected = selectedShapeId === shape.id;
             return (
-              <button
+              <motion.button
                 key={shape.id}
+                whileHover={{ y: -3 }}
+                whileTap={{ scale: 0.98 }}
                 onClick={() => setSelectedShapeId(shape.id)}
                 className={`relative p-5 rounded-2xl text-left border transition-all duration-200 focus:outline-none ${
                   isSelected
@@ -96,10 +110,10 @@ export default function FaceShapeGuide() {
                 <div className="text-xs text-neutral-500 dark:text-neutral-400 font-serif italic">
                   {shape.subtitle}
                 </div>
-              </button>
+              </motion.button>
             );
           })}
-        </div>
+        </motion.div>
 
         {/* Dynamic Detail Card with Framer Motion */}
         <AnimatePresence mode="wait">
@@ -128,13 +142,15 @@ export default function FaceShapeGuide() {
                 </span>
                 <div className="flex flex-wrap gap-2">
                   {current.bestStyles.map((model) => (
-                    <a
+                    <motion.a
                       key={model}
                       href="#collection"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.96 }}
                       className="px-3.5 py-1.5 rounded-full text-xs font-medium bg-neutral-100 hover:bg-neutral-200 text-neutral-800 border border-neutral-200 dark:bg-white/5 dark:hover:bg-emerald-500/10 dark:hover:border-emerald-500/30 dark:border-white/10 dark:text-white transition-colors"
                     >
                       {model}
-                    </a>
+                    </motion.a>
                   ))}
                 </div>
               </div>
@@ -150,13 +166,15 @@ export default function FaceShapeGuide() {
               <p className="text-xs text-neutral-600 dark:text-neutral-400 mb-6">
                 Book a 20-minute digital face scan and 1-on-1 styling consultation with our master opticians.
               </p>
-              <a
+              <motion.a
                 href="#book"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
                 className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-emerald-500 text-white dark:text-[#090b0a] text-xs font-bold uppercase tracking-wider hover:bg-emerald-600 dark:hover:bg-emerald-400 transition-all shadow-sm"
               >
                 <span>Reserve Styling Session</span>
                 <ArrowRight className="w-3.5 h-3.5" />
-              </a>
+              </motion.a>
             </div>
           </motion.div>
         </AnimatePresence>

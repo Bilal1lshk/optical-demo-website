@@ -37,7 +37,13 @@ export default function ReviewsSection() {
   return (
     <section id="reviews" className="py-24 md:py-32 relative bg-[#f1f5f3] dark:bg-[#070908] border-t border-neutral-200 dark:border-white/5 transition-colors duration-250">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6"
+        >
           <div>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light text-neutral-900 dark:text-white font-sans tracking-tight">
               Crafted for clarity, commended by{" "}
@@ -54,7 +60,7 @@ export default function ReviewsSection() {
             <span className="text-sm font-semibold text-neutral-900 dark:text-white">4.9 / 5.0</span>
             <span className="text-xs text-neutral-500 dark:text-neutral-400">· Over 2,300 boutique reviews</span>
           </div>
-        </div>
+        </motion.div>
 
         {/* Reviews Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -63,9 +69,10 @@ export default function ReviewsSection() {
               key={rev.author}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: true, margin: "-40px" }}
               transition={{ delay: idx * 0.1, duration: 0.5 }}
-              className="rounded-3xl bg-white dark:bg-[#0c120f] border border-neutral-200 dark:border-white/10 p-6 sm:p-8 flex flex-col justify-between hover:border-emerald-500/30 transition-all duration-300 shadow-sm hover:shadow-xl"
+              whileHover={{ y: -5, transition: { duration: 0.25, ease: [0.22, 1, 0.36, 1] } }}
+              className="rounded-3xl bg-white dark:bg-[#0c120f] border border-neutral-200 dark:border-white/10 p-6 sm:p-8 flex flex-col justify-between hover:border-emerald-500/30 transition-colors duration-300 shadow-sm hover:shadow-xl hover:shadow-emerald-500/5 cursor-default"
             >
               <div>
                 <div className="flex items-center justify-between mb-6">

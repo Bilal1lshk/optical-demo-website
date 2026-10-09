@@ -126,7 +126,13 @@ export default function BookingSection() {
     <section id="book" className="py-24 md:py-32 relative bg-[#f8faf9] dark:bg-[#090b0a] transition-colors duration-250">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center max-w-2xl mx-auto mb-14">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          className="text-center max-w-2xl mx-auto mb-14"
+        >
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light text-neutral-900 dark:text-white font-sans tracking-tight mb-4">
             Reserve your 20-minute{" "}
             <span className="font-serif italic text-emerald-600 dark:text-emerald-400">eye test.</span>
@@ -134,10 +140,16 @@ export default function BookingSection() {
           <p className="text-sm text-neutral-600 dark:text-neutral-400 font-normal leading-relaxed">
             No credit card needed. Instant calendar hold with optional WhatsApp confirmation.
           </p>
-        </div>
+        </motion.div>
 
         {/* Booking Card */}
-        <div className="bg-white dark:bg-[#0c120f] border border-neutral-200 dark:border-white/10 rounded-3xl p-6 sm:p-10 shadow-xl shadow-black/5 dark:shadow-2xl relative overflow-hidden transition-colors">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.65, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+          className="bg-white dark:bg-[#0c120f] border border-neutral-200 dark:border-white/10 rounded-3xl p-6 sm:p-10 shadow-xl shadow-black/5 dark:shadow-2xl relative overflow-hidden transition-colors"
+        >
           {/* Progress Indicator */}
           {!isBooked && (
             <div className="mb-8">
@@ -163,11 +175,19 @@ export default function BookingSection() {
             </div>
           )}
 
-          {error && (
-            <div className="mb-6 p-3 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-600 dark:text-rose-300 text-xs">
-              {error}
-            </div>
-          )}
+          <AnimatePresence>
+            {error && (
+              <motion.div
+                initial={{ opacity: 0, y: -8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.2 }}
+                className="mb-6 p-3 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-600 dark:text-rose-300 text-xs"
+              >
+                {error}
+              </motion.div>
+            )}
+          </AnimatePresence>
 
           {/* Step 1: Select Service */}
           <AnimatePresence mode="wait">
@@ -184,10 +204,13 @@ export default function BookingSection() {
                   {SERVICES.map((s) => {
                     const selected = selectedService === s.id;
                     return (
-                      <div
+                      <motion.div
                         key={s.id}
+                        whileHover={{ y: -2 }}
+                        whileTap={{ scale: 0.99 }}
+                        transition={{ duration: 0.15 }}
                         onClick={() => setSelectedService(s.id)}
-                        className={`p-4 sm:p-5 rounded-2xl border cursor-pointer transition-all ${
+                        className={`p-4 sm:p-5 rounded-2xl border cursor-pointer transition-colors ${
                           selected
                             ? "bg-[#ecfdf5] dark:bg-emerald-500/10 border-emerald-500 dark:border-emerald-400 shadow-md"
                             : "bg-neutral-50 dark:bg-white/[0.02] border-neutral-200 dark:border-white/5 hover:border-neutral-300 dark:hover:border-white/15"
@@ -205,19 +228,21 @@ export default function BookingSection() {
                         <span className="inline-block text-[10px] uppercase tracking-wider text-neutral-500 font-mono">
                           Duration: {s.duration}
                         </span>
-                      </div>
+                      </motion.div>
                     );
                   })}
                 </div>
 
                 <div className="pt-6 flex justify-end">
-                  <button
+                  <motion.button
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
                     onClick={handleNext}
-                    className="flex items-center gap-2 px-6 py-3 rounded-full bg-emerald-500 text-white dark:text-[#090b0a] text-xs font-bold uppercase tracking-wider hover:bg-emerald-600 dark:hover:bg-emerald-400 transition-all shadow-sm"
+                    className="flex items-center gap-2 px-6 py-3 rounded-full bg-emerald-500 text-white dark:text-[#090b0a] text-xs font-bold uppercase tracking-wider hover:bg-emerald-600 dark:hover:bg-emerald-400 transition-colors shadow-sm"
                   >
                     <span>Continue to Date &amp; Time</span>
                     <ArrowRight className="w-3.5 h-3.5" />
-                  </button>
+                  </motion.button>
                 </div>
               </motion.div>
             )}
@@ -253,38 +278,47 @@ export default function BookingSection() {
                     {TIME_SLOTS.map((slot) => {
                       const isSelected = selectedTime === slot;
                       return (
-                        <button
+                        <motion.button
                           key={slot}
                           type="button"
+                          whileHover={{ scale: 1.03 }}
+                          whileTap={{ scale: 0.97 }}
+                          transition={{ duration: 0.15 }}
                           onClick={() => setSelectedTime(slot)}
-                          className={`py-3 px-2 rounded-xl text-xs font-medium border text-center transition-all ${
+                          className={`py-3 px-2 rounded-xl text-xs font-medium border text-center transition-colors ${
                             isSelected
                               ? "bg-emerald-500 text-white dark:text-[#090b0a] border-emerald-500 font-bold shadow-md"
                               : "bg-neutral-100 dark:bg-white/5 text-neutral-800 dark:text-neutral-300 border-neutral-200 dark:border-white/5 hover:border-neutral-300 dark:hover:border-white/20"
                           }`}
                         >
                           {slot}
-                        </button>
+                        </motion.button>
                       );
                     })}
                   </div>
                 </div>
 
                 <div className="pt-6 flex items-center justify-between border-t border-neutral-200 dark:border-white/5">
-                  <button
+                  <motion.button
+                    type="button"
+                    whileHover={{ x: -2 }}
+                    whileTap={{ scale: 0.98 }}
                     onClick={handleBack}
                     className="flex items-center gap-2 text-xs uppercase tracking-wider text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors"
                   >
                     <ArrowLeft className="w-3.5 h-3.5" />
                     <span>Back</span>
-                  </button>
-                  <button
+                  </motion.button>
+                  <motion.button
+                    type="button"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
                     onClick={handleNext}
-                    className="flex items-center gap-2 px-6 py-3 rounded-full bg-emerald-500 text-white dark:text-[#090b0a] text-xs font-bold uppercase tracking-wider hover:bg-emerald-600 dark:hover:bg-emerald-400 transition-all shadow-sm"
+                    className="flex items-center gap-2 px-6 py-3 rounded-full bg-emerald-500 text-white dark:text-[#090b0a] text-xs font-bold uppercase tracking-wider hover:bg-emerald-600 dark:hover:bg-emerald-400 transition-colors shadow-sm"
                   >
                     <span>Proceed to Details</span>
                     <ArrowRight className="w-3.5 h-3.5" />
-                  </button>
+                  </motion.button>
                 </div>
               </motion.div>
             )}
@@ -373,21 +407,25 @@ export default function BookingSection() {
                 </div>
 
                 <div className="pt-6 flex items-center justify-between border-t border-neutral-200 dark:border-white/5">
-                  <button
+                  <motion.button
                     type="button"
+                    whileHover={{ x: -2 }}
+                    whileTap={{ scale: 0.98 }}
                     onClick={handleBack}
                     className="flex items-center gap-2 text-xs uppercase tracking-wider text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors"
                   >
                     <ArrowLeft className="w-3.5 h-3.5" />
                     <span>Back</span>
-                  </button>
-                  <button
+                  </motion.button>
+                  <motion.button
                     type="submit"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
                     className="flex items-center gap-2 px-7 py-3.5 rounded-full bg-emerald-500 text-white dark:text-[#090b0a] text-xs font-bold uppercase tracking-wider hover:bg-emerald-600 dark:hover:bg-emerald-400 transition-all shadow-md shadow-emerald-500/20"
                   >
                     <span>Confirm Reservation</span>
                     <CheckCircle2 className="w-4 h-4" />
-                  </button>
+                  </motion.button>
                 </div>
               </motion.form>
             )}
@@ -434,27 +472,31 @@ export default function BookingSection() {
                 </div>
 
                 <div className="flex flex-col sm:flex-row justify-center gap-3">
-                  <a
+                  <motion.a
                     href={waUrl}
                     target="_blank"
                     rel="noopener noreferrer"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
                     className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-emerald-500 hover:bg-emerald-600 dark:hover:bg-emerald-400 text-white dark:text-[#090b0a] text-xs font-bold uppercase tracking-wider transition-all shadow-md"
                   >
                     <MessageCircle className="w-4 h-4" />
                     <span>Send to WhatsApp</span>
-                  </a>
+                  </motion.a>
 
-                  <button
+                  <motion.button
                     onClick={handleReset}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
                     className="inline-flex items-center justify-center px-6 py-3.5 rounded-full bg-neutral-100 hover:bg-neutral-200 text-neutral-800 dark:bg-white/5 dark:hover:bg-white/10 dark:text-white text-xs font-medium tracking-wide transition-all border border-neutral-200 dark:border-white/10"
                   >
                     Book Another Slot
-                  </button>
+                  </motion.button>
                 </div>
               </motion.div>
             )}
           </AnimatePresence>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

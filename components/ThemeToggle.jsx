@@ -8,7 +8,7 @@ export default function ThemeToggle({
   showLabel = true,
   variant = "desktop",
 }) {
-  const [theme, setTheme] = useState("dark");
+  const [theme, setTheme] = useState("light");
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -50,7 +50,7 @@ export default function ThemeToggle({
         } ${className}`}
         aria-hidden="true"
       >
-        <div className="w-3.5 h-3.5 rounded-full bg-neutral-400 dark:bg-neutral-600 animate-pulse" />
+        <div className="w-3.5 h-3.5 rounded-full bg-neutral-300 dark:bg-neutral-600" />
       </div>
     );
   }

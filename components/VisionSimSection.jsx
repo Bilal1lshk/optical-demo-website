@@ -34,7 +34,13 @@ export default function VisionSimSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           {/* Left Column: Clinical Diagnostic Overview */}
-          <div className="lg:col-span-6 flex flex-col justify-center">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+            className="lg:col-span-6 flex flex-col justify-center"
+          >
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light text-neutral-900 dark:text-white font-sans tracking-tight mb-6">
               Digital eye exams with{" "}
               <span className="font-serif italic text-emerald-600 dark:text-emerald-400">retinal clarity.</span>
@@ -76,10 +82,14 @@ export default function VisionSimSection() {
                 <span className="text-neutral-500 text-[11px]">Direct billing available</span>
               </div>
             </div>
-          </div>
+          </motion.div>
 
           {/* Right Column: Interactive Eye Tracking & Acuity Simulator */}
-          <div
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.65, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
             ref={rootRef}
             onPointerMove={trackIris}
             onPointerLeave={resetIris}
@@ -181,7 +191,7 @@ export default function VisionSimSection() {
                 />
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

@@ -58,7 +58,13 @@ export default function ClinicServicesSection() {
   return (
     <section id="clinic-services" className="py-24 md:py-32 relative bg-[#f8faf9] dark:bg-[#090b0a] border-t border-neutral-200 dark:border-white/5 transition-colors duration-250">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="max-w-3xl mb-16">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          className="max-w-3xl mb-16"
+        >
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light text-neutral-900 dark:text-white font-sans tracking-tight mb-4">
             Specialized optometric care by{" "}
             <span className="font-serif italic text-emerald-600 dark:text-emerald-400">licensed doctors.</span>
@@ -66,7 +72,7 @@ export default function ClinicServicesSection() {
           <p className="text-sm sm:text-base text-neutral-600 dark:text-neutral-400 leading-relaxed font-normal">
             Every exam is conducted with modern hospital-grade imaging and paired with our bespoke frame studio.
           </p>
-        </div>
+        </motion.div>
 
         {/* Services Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -77,13 +83,14 @@ export default function ClinicServicesSection() {
                 key={s.title}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
+                viewport={{ once: true, margin: "-40px" }}
                 transition={{ delay: idx * 0.08, duration: 0.5 }}
-                className="rounded-3xl bg-white dark:bg-[#0c120f] border border-neutral-200 dark:border-white/10 hover:border-emerald-500/40 p-6 sm:p-8 flex flex-col justify-between transition-all duration-300 shadow-sm hover:shadow-xl hover:shadow-emerald-500/5 group"
+                whileHover={{ y: -6, transition: { duration: 0.25, ease: [0.22, 1, 0.36, 1] } }}
+                className="rounded-3xl bg-white dark:bg-[#0c120f] border border-neutral-200 dark:border-white/10 hover:border-emerald-500/40 p-6 sm:p-8 flex flex-col justify-between transition-colors duration-300 shadow-sm hover:shadow-xl hover:shadow-emerald-500/5 group"
               >
                 <div>
                   <div className="flex items-center justify-between mb-6">
-                    <div className="w-10 h-10 rounded-xl bg-neutral-100 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 flex items-center justify-center text-emerald-600 dark:text-emerald-400">
+                    <div className="w-10 h-10 rounded-xl bg-neutral-100 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 flex items-center justify-center text-emerald-600 dark:text-emerald-400 group-hover:scale-108 transition-transform duration-300">
                       <Icon className="w-5 h-5" />
                     </div>
                     <span className="text-xs text-neutral-500 dark:text-neutral-400 font-medium">
@@ -110,13 +117,15 @@ export default function ClinicServicesSection() {
 
                 <div className="pt-4 border-t border-neutral-200 dark:border-white/5 flex items-center justify-between text-xs">
                   <span className="text-neutral-500 dark:text-neutral-400">{s.cost}</span>
-                  <a
+                  <motion.a
                     href="#book"
+                    whileHover={{ x: 2 }}
+                    whileTap={{ scale: 0.96 }}
                     className="inline-flex items-center gap-1.5 font-semibold text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300 uppercase tracking-wider text-[11px]"
                   >
                     <span>Schedule</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </a>
+                    <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1 duration-200" />
+                  </motion.a>
                 </div>
               </motion.div>
             );

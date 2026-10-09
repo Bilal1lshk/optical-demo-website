@@ -101,7 +101,13 @@ export default function LensStudio() {
     <section id="lens-lab" className="py-24 md:py-32 relative bg-[#f1f5f3] dark:bg-[#070908] border-y border-neutral-200 dark:border-white/5 transition-colors duration-250">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="max-w-3xl mb-16">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          className="max-w-3xl mb-16"
+        >
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light text-neutral-900 dark:text-white font-sans tracking-tight mb-4">
             Custom lenses surfaced to{" "}
             <span className="font-serif italic text-emerald-600 dark:text-emerald-400">
@@ -111,16 +117,24 @@ export default function LensStudio() {
           <p className="text-sm sm:text-base text-neutral-600 dark:text-neutral-400 leading-relaxed font-normal">
             Surfaced in our private laboratory with computer-guided diamond cutters and verified for sharp optical clarity.
           </p>
-        </div>
+        </motion.div>
 
         {/* Interactive Lens Technology Navigation */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-10">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.55, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+          className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-10"
+        >
           {LENS_TECH.map((t) => {
             const Icon = t.icon;
             const isSelected = activeTechId === t.id;
             return (
-              <button
+              <motion.button
                 key={t.id}
+                whileHover={{ y: -3 }}
+                whileTap={{ scale: 0.98 }}
                 onClick={() => {
                   setActiveTechId(t.id);
                   setIsFilterActive(true);
@@ -147,13 +161,19 @@ export default function LensStudio() {
                   {t.badge}
                 </div>
                 <div className="text-sm font-semibold text-neutral-900 dark:text-white">{t.name}</div>
-              </button>
+              </motion.button>
             );
           })}
-        </div>
+        </motion.div>
 
         {/* Visualizer Simulator & Details Card */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-white dark:bg-[#0c120f] border border-neutral-200 dark:border-white/10 rounded-3xl p-6 sm:p-10 shadow-xl shadow-black/5 dark:shadow-none transition-colors">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.65, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+          className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-white dark:bg-[#0c120f] border border-neutral-200 dark:border-white/10 rounded-3xl p-6 sm:p-10 shadow-xl shadow-black/5 dark:shadow-none transition-colors"
+        >
           {/* Left Column: Technology Specs & Explanation */}
           <div className="lg:col-span-6 flex flex-col justify-between">
             <div>
@@ -245,7 +265,9 @@ export default function LensStudio() {
               {/* Interactive On/Off Switch */}
               <div className="relative z-10 flex items-center justify-between pt-4 border-t border-white/10">
                 <span className="text-xs text-neutral-400">Toggle Lens Effect</span>
-                <button
+                <motion.button
+                  whileHover={{ scale: 1.04 }}
+                  whileTap={{ scale: 0.96 }}
                   onClick={() => setIsFilterActive(!isFilterActive)}
                   className={`px-4 py-1.5 rounded-full text-xs font-semibold tracking-wider uppercase transition-all ${
                     isFilterActive
@@ -254,11 +276,11 @@ export default function LensStudio() {
                   }`}
                 >
                   {isFilterActive ? "Filter Active" : "Filter Off"}
-                </button>
+                </motion.button>
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

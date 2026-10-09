@@ -9,7 +9,13 @@ export default function StoreVisitSection() {
   return (
     <section id="visit" className="py-24 md:py-32 relative bg-[#f8faf9] dark:bg-[#090b0a] transition-colors duration-250">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="rounded-3xl bg-white dark:bg-[#0c120f] border border-neutral-200 dark:border-neutral-800 p-8 sm:p-12 lg:p-16 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative overflow-hidden shadow-xl shadow-black/5 dark:shadow-black/40">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+          className="rounded-3xl bg-white dark:bg-[#0c120f] border border-neutral-200 dark:border-neutral-800 p-8 sm:p-12 lg:p-16 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative overflow-hidden shadow-xl shadow-black/5 dark:shadow-black/40"
+        >
           {/* Left Column: Hours & Boutique Details */}
           <div className="lg:col-span-7">
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light text-neutral-900 dark:text-white font-sans tracking-tight mb-4">
@@ -85,25 +91,29 @@ export default function StoreVisitSection() {
             </div>
 
             <div className="flex flex-col sm:flex-row gap-3">
-              <a
+              <motion.a
                 href={mapsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
                 className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full bg-neutral-100 hover:bg-neutral-200 dark:bg-white/10 dark:hover:bg-white/15 text-neutral-800 dark:text-white text-xs font-semibold uppercase tracking-wider transition-all border border-neutral-200 dark:border-white/10"
               >
                 <Navigation className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
                 <span>Get Directions</span>
-              </a>
+              </motion.a>
 
-              <a
+              <motion.a
                 href="#book"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
                 className="inline-flex items-center justify-center px-5 py-3 rounded-full bg-emerald-500 hover:bg-emerald-600 dark:hover:bg-emerald-400 text-white dark:text-[#090b0a] text-xs font-bold uppercase tracking-wider transition-all"
               >
                 Book Appointment
-              </a>
+              </motion.a>
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

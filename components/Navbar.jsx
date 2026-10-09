@@ -99,13 +99,16 @@ export default function Navbar() {
             <div className="hidden lg:flex items-center gap-3">
               <ThemeToggle variant="desktop" />
 
-              <a
+              <motion.a
                 href="#book"
-                className="flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider bg-emerald-500 text-white dark:text-[#090b0a] hover:bg-emerald-600 dark:hover:bg-emerald-400 transition-all duration-200 shadow-sm shadow-emerald-500/20 active:scale-95"
+                whileHover={{ scale: 1.03, y: -1 }}
+                whileTap={{ scale: 0.97 }}
+                transition={{ duration: 0.15 }}
+                className="flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider bg-emerald-500 text-white dark:text-[#090b0a] hover:bg-emerald-600 dark:hover:bg-emerald-400 transition-colors shadow-sm shadow-emerald-500/20"
               >
                 <Calendar className="w-3.5 h-3.5" />
                 <span>Book Appointment</span>
-              </a>
+              </motion.a>
             </div>
 
             {/* Mobile Action Buttons */}
@@ -162,14 +165,15 @@ export default function Navbar() {
               <div className="flex flex-col gap-2 pt-2">
                 <ThemeToggle variant="mobile" />
 
-                <a
+                <motion.a
                   href="#book"
                   onClick={() => setMobileOpen(false)}
+                  whileTap={{ scale: 0.98 }}
                   className="flex items-center justify-center gap-2 w-full py-3 rounded-xl text-xs font-bold uppercase tracking-wider bg-emerald-500 text-white dark:text-[#090b0a]"
                 >
                   <Calendar className="w-4 h-4" />
                   <span>Book Eye Exam or Styling</span>
-                </a>
+                </motion.a>
               </div>
             </div>
           </motion.div>
